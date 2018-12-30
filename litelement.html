@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Stevie's chips</title>
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@^2/webcomponents-bundle.js"></script>
+    <script src="js/items.js"></script>
+    <script type="module">
+      import {LitElement, html} from 'https://unpkg.com/@polymer/lit-element@latest/lit-element.js?module';
+
+      class LitChippy extends LitElement {
+        static get properties() {
+          return {
+              basket: { type: Array }
+            };
+          }
+        constructor(props) {
+          super(props);
+          this.basket = [];
+        }
+
+        addItem({ id, description, price }) {
+            const item = this.basket.find((findItem) => findItem.id === id);
+            
+            if (item) {
+              const newBasket = this.basket.filter((findItem) => findItem.id !== id);
+              return this.basket = [...newBasket, { id, description, price, quantity: item.quantity + 1 }];
+            }
+
+            return this.basket = [...this.basket, { id, description, price, quantity: 1 }];
+        }
+
+        removeItem({ id, description, price, quantity }) {
+          if (quantity > 1) {
+            const newBasket = this.basket.filter((findItem) => findItem.id !== id);
+            return this.basket = [...newBasket, { id, description, price, quantity: quantity - 1 }];
+          }
+
+          return this.basket = this.basket.filter((findItem) => findItem.id !== id);
+        }
+
+        render() {
+          let total = 0;
+          this.basket.map((item) => total = total + (item.quantity * item.price));
+
+          return html`
+            <link rel="stylesheet" type="text/css" href="css/styles.css">
+            <div class="container">
+              <h1 class="header">
+                Stevie's chippy
+              </h1>
+              <div class="main">
+                <div class="chips">
+                  <h3 class="main-header">Chips</h3>
+                  <ul class="main-list">
+                    ${chipItems.map((item) => html`
+                      <li class="main-item" @click=${() => this.addItem(item)}>
+                        <span>${item.description}</span><span>£${item.price}</span>
+                      </li>
+                    `)}
+                  </ul>
+                </div>
+                <div class="burgers">
+                    <h3 class="main-header">Burgers</h3>
+                  <ul class="main-list">
+                    ${burgerItems.map((item) => html`
+                      <li class="main-item" @click=${() => this.addItem(item)}>
+                        <span>${item.description}</span><span>£${item.price}</span>
+                      </li>
+                    `)}
+                  </ul>
+                </div>
+                <div class="chicken">
+                  <h3 class="main-header">Chicken</h3>
+                  <ul class="main-list">
+                    ${chickenItems.map((item) => html`
+                      <li class="main-item" @click=${() => this.addItem(item)}>
+                        <span>${item.description}</span><span>£${item.price}</span>
+                      </li>
+                    `)}
+                  </ul>
+                </div>
+                <div class="sides">
+                  <h3 class="main-header">Sides</h3>
+                  <ul class="main-list">
+                    ${sideItems.map((item) => html`
+                      <li class="main-item" @click=${() => this.addItem(item)}>
+                        <span>${item.description}</span><span>£${item.price}</span>
+                      </li>
+                    `)}
+                  </ul>
+                </div>
+              </div>
+              <div class="address">
+                <p>112 Market Square</p>
+                <p>Dungannon</p>
+                <p>Tyrone</p>
+                <p>Northern Ireland</p>
+              </div>
+              <div class="basket">
+                <span class="title"><span>Quantity</span><span>Price</span></span>
+                <ul class="basket-list">
+                  ${this.basket.map((item) => html`
+                    <li class="basket-item" @click=${() => this.removeItem(item)}>
+                      <span>${item.quantity}</span><span>£${item.price}</span>
+                    </li>
+                  `)}
+                </ul>
+                <span class="total"><span>Total</span><span>£${total}</span></span>
+              </div>
+            </div>
+          `;
+        }
+      };
+
+      customElements.define('lit-chippy', LitChippy);
+    </script>
+  </head>
+  <body>
+    <lit-chippy></lit-chippy>
+  </body>
+</html>
