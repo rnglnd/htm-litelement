@@ -160,7 +160,7 @@
                   <ul class="main-list">
                     ${chipItems.map((item) => html`
                       <li class="main-item" @click=${() => this.addItem(item)}>
-                        <span>${item.description}</span><span>&pound${item.price}</span>
+                        <span>${item.description}</span><span>£${item.price}</span>
                       </li>
                     `)}
                   </ul>
@@ -170,7 +170,7 @@
                   <ul class="main-list">
                     ${burgerItems.map((item) => html`
                       <li class="main-item" @click=${() => this.addItem(item)}>
-                        <span>${item.description}</span><span>&pound${item.price}</span>
+                        <span>${item.description}</span><span>£${item.price}</span>
                       </li>
                     `)}
                   </ul>
@@ -180,7 +180,7 @@
                   <ul class="main-list">
                     ${chickenItems.map((item) => html`
                       <li class="main-item" @click=${() => this.addItem(item)}>
-                        <span>${item.description}</span><span>&pound${item.price}</span>
+                        <span>${item.description}</span><span>£${item.price}</span>
                       </li>
                     `)}
                   </ul>
@@ -190,7 +190,7 @@
                   <ul class="main-list">
                     ${sideItems.map((item) => html`
                       <li class="main-item" @click=${() => this.addItem(item)}>
-                        <span>${item.description}</span><span>&pound${item.price}</span>
+                        <span>${item.description}</span><span>£${item.price}</span>
                       </li>
                     `)}
                   </ul>
@@ -207,11 +207,11 @@
                 <ul class="basket-list">
                   ${this.basket.map((item) => html`
                     <li class="basket-item" @click=${() => this.removeItem(item)}>
-                      <span>${item.quantity}</span><span>&pound${item.price}</span>
+                      <span>${item.quantity}</span><span>£${item.price}</span>
                     </li>
                   `)}
                 </ul>
-                <span class="total"><span>Total</span><span>&pound${total}</span></span>
+                <span class="total"><span>Total</span><span>£${total}</span></span>
               </div>
             </div>
           `;
