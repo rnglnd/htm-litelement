@@ -5,15 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Description" content="An example app using HTM.">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script src="./js/items.js"></script>
   </head>
-  <script src="js/items.js"></script>
   <script type="module">
+    const chipItems = [
+      {
+        id: 1,
+        description: 'Small chip',
+        price: '1.50'
+      }, {
+        id: 2,
+        description: 'Large chip',
+        price: '3.50'
+      }, {
+        id: 3,
+        description: 'Curry chip',
+        price: '4.00'
+      }, {
+        id: 4,
+        description: 'Gravy chip',
+        price: '4.00'
+      }, {
+        id: 5,
+        description: 'Cheesy chip',
+        price: '4.00'
+      }, {
+        id: 6,
+        description: 'Gravy cheesy chip',
+        price: '5.00'
+      }
+    ];
+
+    const burgerItems = [
+      {
+        id: 7,
+        description: 'Burger',
+        price: '4.00'
+      }, {
+        id: 8,
+        description: 'Double burger',
+        price: '5.00'
+      }, {
+        id: 9,
+        description: 'Cheeseburger',
+        price: '4.50'
+      }, {
+        id: 10,
+        description: 'Double cheeseburger',
+        price: '5.50'
+      }, {
+        id: 11,
+        description: 'Chicken burger',
+        price: '3.50'
+      }, {
+        id: 12,
+        description: 'Double chicken burger',
+        price: '4.50'
+      }
+    ];
+
+    const chickenItems = [
+      {
+        id: 13,
+        description: 'Chicken wings',
+        price: '3.00'
+      }, {
+        id: 14,
+        description: 'Chicken drumsticks',
+        price: '3.50'
+      }, {
+        id: 15,
+        description: 'Chip & chicken dippers',
+        price: '5.00'
+      }, {
+        id: 16,
+        description: 'Chicken kebab',
+        price: '6.00'
+      }, {
+        id: 17,
+        description: 'Sliced chicken super',
+        price: '6.00'
+      }, {
+        id: 18,
+        description: 'Chip, pea, chicken, gravy',
+        price: '7.00'
+      }
+    ];
+
+    const sideItems = [
+      {
+        id: 19,
+        description: 'Gravy',
+        price: '1.00'
+      }, {
+        id: 20,
+        description: 'Curry',
+        price: '1.00'
+      }, {
+        id: 21,
+        description: 'Taco',
+        price: '1.00'
+      }, {
+        id: 22,
+        description: 'Cheese',
+        price: '1.00'
+      }
+    ];
+
     import { html, Component, render } from 'https://unpkg.com/htm/preact/standalone.mjs';
 
     class App extends Component {
       constructor(props) {
         super(props);
-        this.state = { chipItems, basket: [] };
+        this.state = { basket: [] };
       }
 
       addItem({ id, description, price }) {
@@ -40,7 +144,7 @@
         });
       }
 
-      render({}, { chipItems, basket }) {
+      render({}, { basket }) {
         let total = 0;
         basket.map((item) => total = total + (item.quantity * item.price));
 
@@ -55,7 +159,7 @@
                 <ul class="main-list">
                   ${chipItems.map((item) => html`
                     <li class="main-item" onClick=${() => this.addItem(item)}>
-                      <span>${item.description}</span><span>£${item.price}</span>
+                      <span>${item.description}</span><span>&pound${item.price}</span>
                     </li>
                   `)}
                 </ul>
@@ -65,7 +169,7 @@
                 <ul class="main-list">
                   ${burgerItems.map((item) => html`
                     <li class="main-item" onClick=${() => this.addItem(item)}>
-                      <span>${item.description}</span><span>£${item.price}</span>
+                      <span>${item.description}</span><span>&pound${item.price}</span>
                     </li>
                   `)}
                 </ul>
@@ -75,7 +179,7 @@
                 <ul class="main-list">
                   ${chickenItems.map((item) => html`
                     <li class="main-item" onClick=${() => this.addItem(item)}>
-                      <span>${item.description}</span><span>£${item.price}</span>
+                      <span>${item.description}</span><span>&pound${item.price}</span>
                     </li>
                   `)}
                 </ul>
@@ -85,7 +189,7 @@
                 <ul class="main-list">
                   ${sideItems.map((item) => html`
                     <li class="main-item" onClick=${() => this.addItem(item)}>
-                      <span>${item.description}</span><span>£${item.price}</span>
+                      <span>${item.description}</span><span>&pound${item.price}</span>
                     </li>
                   `)}
                 </ul>
@@ -102,11 +206,11 @@
               <ul class="basket-list">
                 ${basket.map((item) => html`
                   <li class="basket-item" onClick=${() => this.removeItem(item)}>
-                    <span>${item.quantity}</span><span>£${item.price}</span>
+                    <span>${item.quantity}</span><span>&pound${item.price}</span>
                   </li>
                 `)}
               </ul>
-              <span class="total"><span>Total</span><span>£${total}</span></span>
+              <span class="total"><span>Total</span><span>&pound${total}</span></span>
             </div>
           </div>
         `;
