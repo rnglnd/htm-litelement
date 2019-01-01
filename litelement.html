@@ -143,11 +143,12 @@
 
           return this.basket = this.basket.filter((findItem) => findItem.id !== id);
         }
+        
+        get total() {
+          return this.basket.reduce((total, item) => total + (item.quantity * item.price), 0);
+        }
 
         render() {
-          let total = 0;
-          this.basket.map((item) => total = total + (item.quantity * item.price));
-
           return html`
             <link rel="stylesheet" type="text/css" href="css/styles.css">
             <div class="container">
@@ -211,7 +212,7 @@
                     </li>
                   `)}
                 </ul>
-                <span class="total"><span>Total</span><span>£${total}</span></span>
+                <span class="total"><span>Total</span><span>£${this.total}</span></span>
               </div>
             </div>
           `;
