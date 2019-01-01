@@ -8,13 +8,32 @@
 .chicken { grid-area: chicken; }
 .sides { grid-area: sides; }
 
+body {
+  margin: 0;
+}
+
 .container {
   max-width: 900px;
   display: grid;
   grid-template-areas:
-  'header header header'
-  'main main address'
-  'main main basket';
+  'header header'
+  'main address'
+  'main basket'
+  'main basket';
+  grid-gap: 10px;
+  margin: 4px;
+}
+
+.main {
+  display: grid;
+  grid-template-areas:
+  'chips'
+  'burgers'
+  'chicken'
+  'sides';
+  border: 5px double red;
+  padding: 10px 20px;
+  border-radius: 5px;
   grid-gap: 10px;
 }
 
@@ -28,17 +47,6 @@
   font-style: italic;
 }
 
-.main {
-  display: grid;
-  grid-template-areas:
-  'chips burgers'
-  'chicken sides';
-  border: 5px double red;
-  padding: 10px 20px;
-  border-radius: 5px;
-  grid-gap: 10px;
-}
-
 .main-list, .basket-list {
   padding: 0;
   margin: 0;
@@ -49,6 +57,7 @@
   list-style-type: none;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 .main-header {
@@ -93,4 +102,26 @@
 
 p, span {
   font-size: 16px;
+}
+
+@media only screen and (min-width: 600px) {
+  .container {
+    max-width: 900px;
+    grid-template-areas:
+    'header header header'
+    'main main address'
+    'main main basket';
+    grid-gap: 10px;
+    margin: 8px;
+  }
+
+  .main {
+    grid-template-areas:
+    'chips burgers'
+    'chicken sides';
+  }
+
+  .main-item, .basket-item {
+    margin-bottom: 0px;
+  }
 }
